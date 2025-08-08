@@ -1,0 +1,19 @@
+<svg width="200" height="120" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Quatro anéis da Audi -->
+  <!-- Primeiro anel -->
+  <circle cx="30" cy="60" r="25" fill="none" stroke="#C41E3A" stroke-width="6"/>
+  
+  <!-- Segundo anel -->
+  <circle cx="70" cy="60" r="25" fill="none" stroke="#C41E3A" stroke-width="6"/>
+  
+  <!-- Terceiro anel -->
+  <circle cx="110" cy="60" r="25" fill="none" stroke="#C41E3A" stroke-width="6"/>
+  
+  <!-- Quarto anel -->
+  <circle cx="150" cy="60" r="25" fill="none" stroke="#C41E3A" stroke-width="6"/>
+  
+  <!-- Texto AUDI -->
+  <text x="90" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2D3748">
+    AUDI
+  </text>
+</svg>

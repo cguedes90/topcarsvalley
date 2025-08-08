@@ -1,0 +1,46 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cérebro + Circuito -->
+  <g transform="translate(100, 100)">
+    <!-- Lado esquerdo - Circuito -->
+    <g stroke="#1B9AAA" stroke-width="6" fill="none" stroke-linecap="round">
+      <!-- Linhas principais -->
+      <line x1="-70" y1="-40" x2="-30" y2="-40" />
+      <line x1="-70" y1="-10" x2="-30" y2="-10" />
+      <line x1="-70" y1="20" x2="-30" y2="20" />
+      <line x1="-70" y1="50" x2="-30" y2="50" />
+      
+      <!-- Conexões verticais -->
+      <line x1="-30" y1="-40" x2="-30" y2="50" />
+      
+      <!-- Pontos de conexão -->
+      <circle cx="-70" cy="-40" r="5" fill="#1B9AAA" />
+      <circle cx="-70" cy="-10" r="5" fill="#1B9AAA" />
+      <circle cx="-70" cy="20" r="5" fill="#1B9AAA" />
+      <circle cx="-70" cy="50" r="5" fill="#1B9AAA" />
+      <circle cx="-50" cy="-40" r="4" fill="#1B9AAA" />
+      <circle cx="-50" cy="20" r="4" fill="#1B9AAA" />
+    </g>
+    
+    <!-- Divisor central -->
+    <line x1="0" y1="-60" x2="0" y2="60" stroke="#1B9AAA" stroke-width="8" stroke-linecap="round" />
+    
+    <!-- Lado direito - Cérebro -->
+    <g stroke="#1B9AAA" stroke-width="6" fill="none" stroke-linecap="round">
+      <!-- Forma do cérebro -->
+      <path d="M 10 -50 Q 30 -60 50 -45 Q 70 -30 65 -10 Q 70 10 50 25 Q 40 40 25 45 Q 10 50 10 30 Q 15 10 20 -10 Q 15 -30 10 -50" />
+      
+      <!-- Detalhes internos do cérebro -->
+      <path d="M 20 -35 Q 35 -25 30 -15 Q 25 -5 35 5 Q 45 15 40 25" />
+      <path d="M 45 -35 Q 55 -25 50 -15 Q 45 -5 55 5" />
+      <path d="M 25 -20 Q 35 -10 30 0" />
+    </g>
+  </g>
+  
+  <!-- Texto -->
+  <text x="100" y="170" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2D3748">
+    inovamente
+  </text>
+  <text x="100" y="190" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#2D3748" letter-spacing="3px">
+    LABS
+  </text>
+</svg>
