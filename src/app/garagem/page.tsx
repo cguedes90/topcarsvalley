@@ -248,6 +248,7 @@ const GaragePage = () => {
                         size="sm"
                         variant="outline"
                         className="h-8 w-8 p-0 bg-black/50 border-gray-600 hover:bg-gray-800"
+                        onClick={() => router.push(`/garagem/${vehicle.id}`)}
                       >
                         <Edit className="h-3 w-3" />
                       </Button>
@@ -257,6 +258,20 @@ const GaragePage = () => {
                         className="h-8 w-8 p-0 bg-black/50 border-red-600 hover:bg-red-900 text-red-400"
                       >
                         <Trash2 className="h-3 w-3" />
+                      </Button>
+                    </div>
+                  )}
+
+                  {/* View details for all vehicles */}
+                  {activeTab === 'all' && (
+                    <div className="absolute top-3 right-3">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="h-8 w-8 p-0 bg-black/50 border-gray-600 hover:bg-gray-800"
+                        onClick={() => router.push(`/garagem/${vehicle.id}`)}
+                      >
+                        <Eye className="h-3 w-3" />
                       </Button>
                     </div>
                   )}
