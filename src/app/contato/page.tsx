@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Navigation from "@/components/navigation/Navigation";
 import Footer from "@/components/navigation/Footer";
 import { Button } from "@/components/ui/button";
 import { Mail, Phone, MapPin, Clock, MessageCircle, Send, User, Building, HelpCircle } from "lucide-react";
 
-const ContactPage = () => {
+const ContactForm = () => {
   const searchParams = useSearchParams();
   
   const [formData, setFormData] = useState({
@@ -385,6 +385,14 @@ const ContactPage = () => {
 
       <Footer />
     </div>
+  );
+};
+
+const ContactPage = () => {
+  return (
+    <Suspense fallback={<div>Carregando...</div>}>
+      <ContactForm />
+    </Suspense>
   );
 };
 
