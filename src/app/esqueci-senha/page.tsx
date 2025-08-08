@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Navigation from "@/components/navigation/Navigation";
 import Footer from "@/components/navigation/Footer";
 import { Button } from "@/components/ui/button";
 import { Mail, Lock, ArrowLeft, CheckCircle, AlertCircle, Eye, EyeOff } from "lucide-react";
 
-const ResetPasswordPage = () => {
+const ResetPasswordContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get('token');
@@ -324,6 +324,18 @@ const ResetPasswordPage = () => {
 
       <Footer />
     </div>
+  );
+};
+
+const ResetPasswordPage = () => {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-black via-charcoal to-graphite flex items-center justify-center">
+        <div className="text-white">Carregando...</div>
+      </div>
+    }>
+      <ResetPasswordContent />
+    </Suspense>
   );
 };
 

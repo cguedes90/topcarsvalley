@@ -5,6 +5,8 @@ import nodemailer from 'nodemailer';
 
 const prisma = new PrismaClient();
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: NextRequest) {
   try {
     const { email } = await request.json();

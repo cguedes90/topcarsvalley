@@ -3,6 +3,8 @@ import jwt from 'jsonwebtoken';
 import { prisma } from '@/lib/prisma';
 import { sendInviteEmail } from '@/lib/email';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: NextRequest) {
   try {
     // Verify authentication
