@@ -23,11 +23,12 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: '16x16' },
-      { url: '/icon.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
     ],
     shortcut: '/favicon.ico',
-    apple: '/apple-icon.png',
+    apple: '/apple-touch-icon.svg',
   },
+  manifest: '/manifest.json',
   openGraph: {
     type: "website",
     url: "https://topcarsvalley.com",

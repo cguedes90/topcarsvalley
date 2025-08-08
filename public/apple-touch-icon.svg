@@ -1,0 +1,39 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with racing theme gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#DC2626;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B91C1C;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="carGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E5E5E5;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="180" height="180" rx="35" fill="url(#bgGradient)"/>
+  
+  <!-- Sports car silhouette (scaled up) -->
+  <!-- Car roof/windshield -->
+  <path d="M39 78 L50 56 L130 56 L141 78 Z" fill="url(#carGradient)" opacity="0.9"/>
+  
+  <!-- Car main body -->
+  <path d="M22 90 L34 78 L146 78 L158 90 L158 112 L146 124 L135 124 C135 129.5 131.5 134 126 134 C120.5 134 117 129.5 117 124 L67 124 C67 129.5 63.5 134 58 134 C52.5 134 49 129.5 49 124 L34 124 L22 112 Z" fill="url(#carGradient)"/>
+  
+  <!-- Wheels -->
+  <circle cx="58" cy="118" r="14" fill="#262626"/>
+  <circle cx="126" cy="118" r="14" fill="#262626"/>
+  <circle cx="58" cy="118" r="8.5" fill="#525252"/>
+  <circle cx="126" cy="118" r="8.5" fill="#525252"/>
+  
+  <!-- Racing stripes -->
+  <rect x="84" y="56" width="5.6" height="67" fill="#DC2626" opacity="0.7"/>
+  <rect x="92.5" y="56" width="5.6" height="67" fill="#DC2626" opacity="0.7"/>
+  
+  <!-- Headlight -->
+  <ellipse cx="146" cy="95" rx="5.6" ry="4.5" fill="#FFF" opacity="0.8"/>
+  
+  <!-- Window detail -->
+  <path d="M50 67 L130 67 L135 73 L45 73 Z" fill="#1F2937" opacity="0.6"/>
+</svg>
