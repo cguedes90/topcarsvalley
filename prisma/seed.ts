@@ -212,6 +212,81 @@ async function main() {
   }
 
   console.log('✅ Sample partners created')
+
+  // Create test user Cedrique Guedes if not exists
+  const testUser = await prisma.user.upsert({
+    where: { email: 'cedriquepereira@gmail.com' },
+    update: {},
+    create: {
+      email: 'cedriquepereira@gmail.com',
+      name: 'Cedrique Guedes',
+      phone: '+5511974508168',
+      password: await bcrypt.hash('123456', 12),
+      role: UserRole.MEMBER,
+      isActive: true,
+    },
+  })
+
+  console.log('✅ Test user created:', testUser.email)
+
+  // Create sample vehicles for the test user
+  const vehicles = [
+    {
+      brand: 'Audi',
+      model: 'TT',
+      year: 2009,
+      color: 'Preto',
+      fuelType: 'Gasolina',
+      horsepower: 200,
+      description: 'Audi TT 2009 em excelente estado, motor 2.0 turbo',
+      photos: [],
+      isPublic: true,
+      ownerId: testUser.id,
+    },
+    {
+      brand: 'BMW',
+      model: 'M3',
+      year: 2015,
+      color: 'Azul',
+      fuelType: 'Gasolina',
+      horsepower: 425,
+      description: 'BMW M3 2015 performance, motor V6 biturbo',
+      photos: [],
+      isPublic: true,
+      ownerId: testUser.id,
+    },
+    {
+      brand: 'Mercedes-Benz',
+      model: 'AMG GT',
+      year: 2018,
+      color: 'Prata',
+      fuelType: 'Gasolina',
+      horsepower: 462,
+      description: 'Mercedes AMG GT 2018, motor V8 4.0 biturbo',
+      photos: [],
+      isPublic: true,
+      ownerId: testUser.id,
+    }
+  ]
+
+  for (const vehicleData of vehicles) {
+    const existingVehicle = await prisma.vehicle.findFirst({
+      where: { 
+        ownerId: vehicleData.ownerId,
+        brand: vehicleData.brand,
+        model: vehicleData.model,
+        year: vehicleData.year
+      }
+    })
+    
+    if (!existingVehicle) {
+      await prisma.vehicle.create({
+        data: vehicleData,
+      })
+    }
+  }
+
+  console.log('✅ Sample vehicles created')
   console.log('🎉 Seeding completed successfully!')
 }
 

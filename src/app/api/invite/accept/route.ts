@@ -110,6 +110,32 @@ export async function POST(request: NextRequest) {
 
     console.log('✅ Usuário atualizado com sucesso:', updatedUser.email);
 
+    // Se dados do carro foram fornecidos, criar um veículo na garagem
+    if (carBrand && carModel && carYear) {
+      console.log('🚗 Criando veículo na garagem...');
+      
+      try {
+        await prisma.vehicle.create({
+          data: {
+            brand: carBrand,
+            model: carModel,
+            year: parseInt(carYear),
+            color: 'Não informado', // Campo obrigatório, será editável depois
+            fuelType: 'Gasolina', // Padrão, será editável depois
+            description: `${carBrand} ${carModel} ${carYear} cadastrado durante o aceite do convite`,
+            photos: [],
+            isPublic: true,
+            ownerId: user.id,
+          }
+        });
+        
+        console.log('✅ Veículo criado na garagem com sucesso!');
+      } catch (vehicleError) {
+        console.error('⚠️ Erro ao criar veículo (continuando sem falhar):', vehicleError);
+        // Não falha o processo se der erro no veículo
+      }
+    }
+
     return NextResponse.json({
       success: true,
       message: 'Cadastro concluído com sucesso!',
