@@ -9,20 +9,25 @@ export async function POST(request: NextRequest) {
   try {
     console.log('🔄 Iniciando migração de carros do perfil para a garagem...');
 
-    // Buscar todos os usuários que têm dados de carro no perfil mas não têm veículos na garagem
+    // Buscar todos os usuários que têm dados de carro no perfil
     const usersWithProfileCars = await prisma.user.findMany({
       where: {
         profile: {
-          AND: [
-            { carBrand: { not: null } },
-            { carModel: { not: null } },
-            { carYear: { not: null } }
-          ]
+          carBrand: { not: null },
+          carModel: { not: null },
+          carYear: { not: null }
         }
       },
-      include: {
-        profile: true,
-        vehicles: true
+      select: {
+        id: true,
+        email: true,
+        profile: {
+          select: {
+            carBrand: true,
+            carModel: true,
+            carYear: true
+          }
+        }
       }
     });
 
@@ -30,28 +35,29 @@ export async function POST(request: NextRequest) {
 
     let migratedCount = 0;
     let skippedCount = 0;
+    const errors = [];
 
     for (const user of usersWithProfileCars) {
       if (!user.profile) continue;
 
-      // Verificar se já tem um veículo com os mesmos dados
-      const existingVehicle = await prisma.vehicle.findFirst({
-        where: {
-          ownerId: user.id,
-          brand: user.profile.carBrand!,
-          model: user.profile.carModel!,
-          year: user.profile.carYear!
-        }
-      });
-
-      if (existingVehicle) {
-        console.log(`⏭️ Usuário ${user.email} já tem o veículo na garagem, pulando...`);
-        skippedCount++;
-        continue;
-      }
-
-      // Criar o veículo na garagem
       try {
+        // Verificar se já tem um veículo com os mesmos dados
+        const existingVehicle = await prisma.vehicle.findFirst({
+          where: {
+            ownerId: user.id,
+            brand: user.profile.carBrand!,
+            model: user.profile.carModel!,
+            year: user.profile.carYear!
+          }
+        });
+
+        if (existingVehicle) {
+          console.log(`⏭️ Usuário ${user.email} já tem o veículo na garagem, pulando...`);
+          skippedCount++;
+          continue;
+        }
+
+        // Criar o veículo na garagem
         await prisma.vehicle.create({
           data: {
             brand: user.profile.carBrand!,
@@ -71,6 +77,10 @@ export async function POST(request: NextRequest) {
 
       } catch (vehicleError) {
         console.error(`❌ Erro ao migrar veículo para ${user.email}:`, vehicleError);
+        errors.push({
+          user: user.email,
+          error: vehicleError instanceof Error ? vehicleError.message : 'Erro desconhecido'
+        });
       }
     }
 
@@ -80,14 +90,19 @@ export async function POST(request: NextRequest) {
       details: {
         migrated: migratedCount,
         skipped: skippedCount,
-        total: usersWithProfileCars.length
+        total: usersWithProfileCars.length,
+        errors: errors
       }
     });
 
   } catch (error) {
     console.error('❌ Erro na migração:', error);
     return NextResponse.json(
-      { success: false, error: 'Erro interno do servidor' },
+      { 
+        success: false, 
+        error: 'Erro interno do servidor',
+        details: error instanceof Error ? error.message : 'Erro desconhecido'
+      },
       { status: 500 }
     );
   }
